@@ -2,18 +2,11 @@ import os
 from PIL import Image
 
 cwd = os.getcwd()
-print ("CWD: ", cwd)
-# x= os.path.join(cwd, "\dataset")
-# print (os.path.join(x, ))
-# train_path = "C:/Users/User/Desktop/STUDIA/s5/POiWK/fruits-recognition/dataset/fruits_360_dataset/fruits/Training/"
-# test_path = "C:/Users/User/Desktop/STUDIA/s5/POiWK/fruits-recognition/dataset/fruits_360_dataset/fruits/Test/"
-
 BASE_PATH = os.path.join(cwd, "dataset", "fruits_360_dataset", "fruits")
-
 TRAIN_PATH = os.path.join(BASE_PATH, "Training")
-TEST_PATH  = os.path.join(BASE_PATH, "fruits\Test")
+TEST_PATH = os.path.join(BASE_PATH, "fruits\Test")
 
-print (TRAIN_PATH)
+print(TRAIN_PATH)
 print(TEST_PATH)
 
 # def delete_background(img):
@@ -29,9 +22,9 @@ print(TEST_PATH)
 #         else:
 #             newData.append(item)
 #     img.putdata(newData)
-  
+
 #     return img
-    
+
 
 # def save_in_new_dir(img, dirname, filename):
 #     new_dir = dirname.replace("fruits_360_dataset", "without_background")
@@ -46,4 +39,3 @@ print(TEST_PATH)
 #             img = Image.open(image)
 #             img = delete_background(img)
 #             save_in_new_dir(img, dirname, filename)
-    
