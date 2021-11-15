@@ -1,32 +1,49 @@
 import os
-import cv2
-import pandas as pd
-import  numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
+from PIL import Image
 
+cwd = os.getcwd()
+print ("CWD: ", cwd)
+# x= os.path.join(cwd, "\dataset")
+# print (os.path.join(x, ))
+# train_path = "C:/Users/User/Desktop/STUDIA/s5/POiWK/fruits-recognition/dataset/fruits_360_dataset/fruits/Training/"
+# test_path = "C:/Users/User/Desktop/STUDIA/s5/POiWK/fruits-recognition/dataset/fruits_360_dataset/fruits/Test/"
 
-for dirname, _, filenames in os.walk("C:/Users/User/Desktop/STUDIA/s5/POiWK/fruits-recognition/dataset/fruits_360_dataset/fruits/Test/"):
-    for filename in filenames:
-        print(os.path.join(dirname, filename))
+BASE_PATH = os.path.join(cwd, "dataset", "fruits_360_dataset", "fruits")
 
+TRAIN_PATH = os.path.join(BASE_PATH, "Training")
+TEST_PATH  = os.path.join(BASE_PATH, "fruits\Test")
 
+print (TRAIN_PATH)
+print(TEST_PATH)
 
-from keras.models import Sequential 
-from keras.layers import Conv2D, MaxPooling2D, Activation, Dropout, Flatten, Dense
-from keras.preprocessing.image import ImageDataGenerator, img_to_array, load_img
+# def delete_background(img):
+#     img = img.convert("RGBA")
 
+#     datas = img.getdata()
 
+#     newData = []
 
-train_path = "C:/Users/User/Desktop/STUDIA/s5/POiWK/fruits-recognition/dataset/fruits_360_dataset/fruits/Training/"
-test_path = "C:/Users/User/Desktop/STUDIA/s5/POiWK/fruits-recognition/dataset/fruits_360_dataset/fruits/Test/"
+#     for item in datas:
+#         if item[0] == 255 and item[1] == 255 and item[2] == 255:
+#             newData.append((255, 255, 255, 0))
+#         else:
+#             newData.append(item)
+#     img.putdata(newData)
+  
+#     return img
+    
 
+# def save_in_new_dir(img, dirname, filename):
+#     new_dir = dirname.replace("fruits_360_dataset", "without_background")
+#     if not os.path.exists(new_dir):
+#         os.makedirs(new_dir)
+#     img.save(os.path.join(new_dir, filename), "PNG")
 
-
-image = train_path + "Limes/0_100.jpg"
-img = cv2.imread(image)
-cv2.imshow('image', img)
-cv2.waitKey(0)
-
-img = img_to_array(img)
-img.shape()
+# for path_ in [test_path, train_path]:
+#     for dirname, _, filenames in os.walk(path_):
+#         for filename in filenames:
+#             image = os.path.join(dirname, filename)
+#             img = Image.open(image)
+#             img = delete_background(img)
+#             save_in_new_dir(img, dirname, filename)
+    
