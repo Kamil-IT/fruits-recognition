@@ -4,8 +4,8 @@ from generate_model.properties import TRAIN_DIR, VAL_DIR
 
 
 def import_images():
-    training_datagen = ImageDataGenerator(rescale=1. / 255)
-    validation_datagen = ImageDataGenerator(rescale=1. / 255)
+    training_datagen = ImageDataGenerator()
+    validation_datagen = ImageDataGenerator()
 
     train_gen = training_datagen.flow_from_directory(TRAIN_DIR,
                                                      target_size=(100, 100),
