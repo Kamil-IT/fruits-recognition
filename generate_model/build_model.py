@@ -1,14 +1,9 @@
+import datetime
+
 import tensorflow as tf
 
 from generate_model.import_images import import_images
 from generate_model.properties import MODEL_PATH
-
-
-class CallbackOnEpochEpochEnd(tf.keras.callbacks.Callback):
-    def on_epoch_end(self, epoch, logs):
-        if epoch == 1:
-            print("\nCancelling training, epoch 1")
-            self.model.stop_training = True
 
 
 def prepare_model_to_learn():
@@ -36,14 +31,40 @@ def prepare_model_to_learn():
     ])
 
 
-train, test = import_images()
+train, val, test = import_images()
 
 model = prepare_model_to_learn()
 model.summary()
-model.compile(loss="categorical_crossentropy", optimizer='rmsprop', metrics=['accuracy'])
+model.compile(
+    loss="categorical_crossentropy",
+    optimizer='rmsprop',
+    metrics=[
+        'accuracy',
+        'FalseNegatives',
+        'FalsePositives',
+        'TopKCategoricalAccuracy',
+        'TrueNegatives',
+        'TruePositives'
+    ])
+
+
+def get_log_folder_name(n_classes):
+    return f'log/{n_classes}-classes_{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")}'
+
+
+# Metrics
+tensorboard_callback = tf.keras.callbacks.TensorBoard(
+    log_dir=get_log_folder_name(train.num_classes),
+    histogram_freq=1)
 
 # Train
-fruit_model = model.fit(train, epochs=100, validation_data=test, verbose=1, callbacks=[CallbackOnEpochEpochEnd()], workers=10)
+fruit_model = model.fit(train,
+                        epochs=50,
+                        validation_data=val,
+                        workers=10,
+                        callbacks=tensorboard_callback,
+                        validation_steps=20,  # 20 x 32 (batch size) = 640 images
+                        )
 
 # Save
 tf.keras.models.save_model(

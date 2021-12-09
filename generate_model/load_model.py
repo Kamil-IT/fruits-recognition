@@ -5,6 +5,7 @@ import numpy as np
 import tensorflow as tf
 from keras_preprocessing import image
 
+from generate_model.import_images import import_images
 from generate_model.properties import MODEL_H5_PATH
 
 
@@ -50,5 +51,29 @@ def predict(fruits, image_dir):
     print(img_classification, fruits)
 
 
+train, valid, test = import_images()
 model = load_model()
 model.summary()
+
+test.reset()
+n_samples = test.samples
+batch_size = 32
+
+prediction = model.predict(test, verbose=1, batch_size=batch_size, steps=n_samples / batch_size)
+
+predicted_class = np.argmax(prediction, axis=1)
+
+l = dict((v, k) for k, v in test.class_indices.items())
+prednames = [l[k] for k in predicted_class]
+
+filenames = [name[:name.rfind('\\')] for name in test.filenames]
+
+good = 0
+for i in range(len(filenames)):
+    if filenames[i] == prednames[i]:
+        good += 1
+
+prediction_succes = good / len(filenames)
+print(good)
+print(len(filenames))
+print("percent " + str(prediction_succes))
