@@ -4,7 +4,7 @@ from PIL import Image
 
 cwd = os.getcwd()
 
-BASE_PATH = os.path.join(cwd, "dataset", "fruits_360_dataset", "fruits")
+BASE_PATH = os.path.join(cwd, "dataset", "fruits-360_dataset", "fruits")
 
 TRAIN_PATH = os.path.join(BASE_PATH, "Training")
 TEST_PATH = os.path.join(BASE_PATH, "Test")
@@ -28,13 +28,14 @@ TEST_PATH = os.path.join(BASE_PATH, "Test")
 
 
 # def save_in_new_dir(img, dirname, filename):
-#     new_dir = dirname.replace("fruits_360_dataset", "without_background")
+#     new_dir = dirname.replace("fruits-360_dataset", "without_background")
 #     if not os.path.exists(new_dir):
 #         os.makedirs(new_dir)
 #     img.save(os.path.join(new_dir, filename), "PNG")
 
-
+# print("before")
 # for path_ in [TEST_PATH, TRAIN_PATH]:
+#     print("IN")
 #     for dirname, _, filenames in os.walk(path_):
 #         for filename in filenames:
 #             image = os.path.join(dirname, filename)
@@ -53,7 +54,7 @@ for dirname, _, filenames in os.walk(os.path.join(cwd, "dataset", "without_backg
             if not os.path.exists(new_dir):
                 os.makedirs(new_dir)
             img.save(os.path.join(new_dir, element), "PNG")
-            os.remove(image) #dziala
+            os.remove(image)
 
 
             
