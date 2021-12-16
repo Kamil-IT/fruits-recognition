@@ -57,7 +57,7 @@ model.summary()
 
 test.reset()
 n_samples = test.samples
-batch_size = 32
+batch_size = 49
 
 prediction = model.predict(test, verbose=1, batch_size=batch_size, steps=n_samples / batch_size)
 
@@ -69,11 +69,15 @@ prednames = [l[k] for k in predicted_class]
 filenames = [name[:name.rfind('\\')] for name in test.filenames]
 
 good = 0
+map = {}
 for i in range(len(filenames)):
     if filenames[i] == prednames[i]:
         good += 1
+    else:
+        map[prednames[i]] = filenames[i]
 
 prediction_succes = good / len(filenames)
 print(good)
 print(len(filenames))
 print("percent " + str(prediction_succes))
+print(map)

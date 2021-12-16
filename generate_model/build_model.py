@@ -27,7 +27,7 @@ def prepare_model_to_learn():
         # 15 = 15 different categories
         # softmas takes a set of values and effectively picks the biggest one. for example if the output layer has
         # [0.1,0.1,0.5,0.2,0.1], it will take it and turn it into [0,0,1,0,0]
-        tf.keras.layers.Dense(35, activation="softmax")
+        tf.keras.layers.Dense(131, activation="softmax")
     ])
 
 
@@ -59,11 +59,11 @@ tensorboard_callback = tf.keras.callbacks.TensorBoard(
 
 # Train
 fruit_model = model.fit(train,
-                        epochs=50,
+                        epochs=5,
                         validation_data=val,
                         workers=10,
                         callbacks=tensorboard_callback,
-                        validation_steps=20,  # 20 x 32 (batch size) = 640 images
+                        validation_steps=20,  # 20 x 34 (batch size) = 640 images
                         )
 
 # Save

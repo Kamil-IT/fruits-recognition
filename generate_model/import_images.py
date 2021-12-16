@@ -11,6 +11,7 @@ def import_images():
     train = training_datagen.flow_from_directory(TRAIN_DIR,
                                                  target_size=(100, 100),
                                                  shuffle=True,
+                                                 batch_size=34,
                                                  color_mode='rgb',
                                                  class_mode="categorical")  # multi-class classification.
 
@@ -23,6 +24,7 @@ def import_images():
     test = test_datagen.flow_from_directory(TEST_DIR,
                                             target_size=(100, 100),
                                             color_mode='rgb',
+                                            batch_size=49,
                                             class_mode="categorical",  # multi-class classification.
                                             shuffle=False)
 
