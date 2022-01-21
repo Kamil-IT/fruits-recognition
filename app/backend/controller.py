@@ -1,8 +1,7 @@
 import numpy as np
 import tensorflow as tf
 from flask import Flask, request, Response
-from tensorflow.keras.applications.resnet50 import preprocess_input
-from tensorflow.keras.preprocessing import image
+from keras_preprocessing.image import ImageDataGenerator
 
 app = Flask(__name__)
 
@@ -40,12 +39,15 @@ model = tf.keras.models.load_model(
 
 
 def predict():
-    img = image.load_img('image_to_predict.jpg', target_size=(100, 100), color_mode='rgb')
-    img_array = image.img_to_array(img)
-    img_batch = np.expand_dims(img_array, axis=0)
-    img_preprocessed = preprocess_input(img_batch) / 255
+    test_gen = ImageDataGenerator(rescale=1. / 255)
+    test = test_gen.flow_from_directory('img/',
+                                        target_size=(100, 100),
+                                        shuffle=True,
+                                        batch_size=34,
+                                        color_mode='rgb',
+                                        class_mode="categorical")  # multi-class classification.
 
-    prediction = model.predict(img_preprocessed)
+    prediction = model.predict(test)
 
     return prediction
 
@@ -62,7 +64,7 @@ def get_top_3_elements(predictions):
 
 @app.route('/recognize/image', methods=['POST', 'GET'])
 def show_user():
-    request.files['myfile'].save('image_to_predict.jpg')
+    request.files['myfile'].save('img/test/image_to_predict.jpg')
 
     prediction = predict()
     elements = get_top_3_elements(prediction[0].copy())
@@ -71,5 +73,3 @@ def show_user():
 
 
 app.run()
-
-print('sdasdada')
