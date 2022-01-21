@@ -5,19 +5,54 @@
     <title>Fruit recognition</title>
 </head>
 <body>
-<form id="uploadbanner" enctype="multipart/form-data" method="post" action="http://127.0.0.1:5000/recognize/image">
-    <input id="fileupload" name="myfile" type="file"/>
-    <input type="submit" value="submit" id="submit"/>
-</form>
 
-<a href="http://localhost:6006/">
 
-    <img src="img/tb_logo.png"
-         width="100"
-         height="60">
-    <p>Metrics</p>
+<style>
+    body {background-image: url("img/hexellence.png");}
+</style>
 
-</a>
+<div style = "background-color: white;
+width: 300px;
+padding: 50px;
+margin-left: auto;
+margin-right: auto;
+margin-top: 100px;
+-webkit-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+-moz-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);">
+
+    <form id="uploadbanner" enctype="multipart/form-data" method="post" action="http://127.0.0.1:5000/recognize/image">
+        <input id="fileupload" name="myfile" type="file"/>
+        
+        <input type="submit" value="submit" id="submit"/>
+    </form>
+
+
+    <a href="http://localhost:6006/" style = "text-decoration: none;">
+
+
+
+        <img src="img/tb_logo.png"
+            width="100"
+            height="60">
+        <p style= " width: 105px;
+        background-color: #36b03c;
+        font-size:20px;
+        color: white;
+        padding: 15px 10px;
+        margin-top: 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        letter-spacing: 2px;
+        outline: none;-webkit-box-shadow: 0px 0px 15px 5px rgba(204,204,204,0.9);
+	-moz-box-shadow: 0px 0px 15px 5px rgba(204,204,204,0.9);
+	box-shadow: 0px 0px 15px 5px rgba(204,204,204,0.9);">METRYKI</p>
+
+    </a>
+</div>
+
+
 
 </body>
 </html>
